@@ -57,6 +57,7 @@ kotlin {
                 implementation(Deps.Jvm.ktorServetNetty)
                 implementation(Deps.Jvm.ktorGson)
                 implementation(Deps.Jvm.ktorAuthJwt)
+                implementation(Deps.Jvm.ktorLocation)
 
                 implementation(Deps.Jvm.kodeinKtorServer)
                 implementation(Deps.Jvm.logback)

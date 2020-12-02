@@ -1,0 +1,447 @@
+openapi: 3.0.0
+info:
+  description: "User service"
+  version: "1.0.0"
+  title: "User service"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "alxminyaev@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+# host: "0.0.0.0"
+# basePath: "/auth"
+
+servers:
+  - url: "http://localhost/user"
+tags:
+  - name: "Professor"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
+  - name: "Student"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
+  - name: "Tutor"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
+
+paths:
+  /api/v1/professor:
+    post:
+      tags:
+        - "Professor"
+      summary: "Create professor"
+      description: ""
+      operationId: "postProfessor"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreatedResponse"
+        "401":
+          description: "Unauthorized"
+  /api/v1/professor/{id}:
+    get:
+      tags:
+        - "Professor"
+      summary: "Get professor by id "
+      description: ""
+      operationId: "getProfessorById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to return
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProfessorGetRequest"
+        "404":
+          description: "Not found"
+    delete:
+      tags:
+        - "Professor"
+      summary: "Get professor by id "
+      description: ""
+      operationId: "deleteProfessorById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to delete
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+        "404":
+          description: "Not found"
+        "401":
+          description: "Unauthorized"
+    put:
+      tags:
+        - "Professor"
+      summary: "Update professor"
+      description: ""
+      operationId: "updateProfessorById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to update
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfessorPutRequest'
+      responses:
+        '200':
+          description: OK
+        "404":
+          description: "Not found"
+        "401":
+          description: "Unauthorized"
+
+
+  /api/v1/student:
+    post:
+      tags:
+        - "Student"
+      summary: "Create student"
+      description: ""
+      operationId: "postStudent"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreatedResponse"
+        "401":
+          description: "Unauthorized"
+  /api/v1/student/{id}:
+    get:
+      tags:
+        - "Student"
+      summary: "Get student by id "
+      description: ""
+      operationId: "getStudentById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudentGetResponse"
+        "404":
+          description: "Not found"
+    delete:
+      tags:
+        - "Student"
+      summary: "Get student by id "
+      description: ""
+      operationId: "deleteStudentById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        "404":
+          description: "Not found"
+        "401":
+          description: "Unauthorized"
+    put:
+      tags:
+        - "Student"
+      summary: "Update student"
+      description: ""
+      operationId: "updateStudentById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentPutRequest'
+      responses:
+        '200':
+          description: OK
+        "404":
+          description: "Not found"
+        "401":
+          description: "Unauthorized"
+
+  /api/v1/tutor:
+    post:
+      tags:
+        - "Tutor"
+      summary: "Create tutor"
+      description: ""
+      operationId: "postTutor"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TutorPostRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreatedResponse"
+        "401":
+          description: "Unauthorized"
+  /api/v1/tutor/{id}:
+    get:
+      tags:
+        - "Tutor"
+      summary: "Get tutor by id "
+      description: ""
+      operationId: "getTutorById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to return
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TutorGetResponse"
+        "404":
+          description: "Not found"
+    delete:
+      tags:
+        - "Tutor"
+      summary: "Get tutor by id "
+      description: ""
+      operationId: "deleteTutorById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to delete
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+        "404":
+          description: "Not found"
+        "401":
+          description: "Unauthorized"
+    put:
+      tags:
+        - "Tutor"
+      summary: "Update tutor"
+      description: ""
+      operationId: "updateTutorById"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to update
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TutorPutRequest'
+      responses:
+        '200':
+          description: OK
+        "404":
+          description: "Not found"
+        "401":
+          description: "Unauthorized"
+
+
+components:
+  schemas:
+    Profile:
+      type: object
+      required:
+        - firstName
+        - lastName
+      properties:
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        middleName:
+          type: "string"
+
+    AccountNew:
+      type: object
+      required:
+        - login
+        - password
+        - repeatPassword
+      properties:
+        login:
+          type: "string"
+        password:
+          type: "string"
+        repeatPassword:
+          type: "string"
+
+    ProfessorPostRequest:
+      type: object
+      required:
+        - account
+        - profile
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountNew'
+        profile:
+          $ref: '#/components/schemas/Profile'
+    ProfessorPutRequest:
+      type: object
+      required:
+        - account
+      properties:
+        profile:
+          $ref: '#/components/schemas/Profile'
+
+    ProfessorGetRequest:
+      type: object
+      required:
+        - id
+        - profile
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        profile:
+          $ref: '#/components/schemas/Profile'
+
+    TutorPostRequest:
+      type: object
+      required:
+        - account
+        - profile
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountNew'
+        profile:
+          $ref: '#/components/schemas/Profile'
+    TutorPutRequest:
+      type: object
+      required:
+        - profile
+      properties:
+        profile:
+          $ref: '#/components/schemas/Profile'
+
+    TutorGetResponse:
+      type: object
+      required:
+        - id
+        - profile
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        profile:
+          $ref: '#/components/schemas/Profile'
+
+
+    StudentPostRequest:
+      type: object
+      required:
+        - account
+        - profile
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountNew'
+        profile:
+          $ref: '#/components/schemas/Profile'
+
+    StudentPutRequest:
+      type: object
+      required:
+        - profile
+      properties:
+        profile:
+          $ref: '#/components/schemas/Profile'
+
+    StudentGetResponse:
+      type: object
+      required:
+        - id
+        - profile
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        profile:
+          $ref: '#/components/schemas/Profile'
+
+
+
+    UserCreatedResponse:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

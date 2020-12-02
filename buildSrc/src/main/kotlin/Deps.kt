@@ -112,6 +112,7 @@ object Deps {
 
         const val ktorAuth = "io.ktor:ktor-auth:${Versions.Kotlin.ktor}"
         const val ktorAuthJwt = "io.ktor:ktor-auth-jwt:${Versions.Kotlin.ktor}"
+        const val ktorLocation = "io.ktor:ktor-locations:${Versions.Kotlin.ktor}"
 
         const val koinCore = "org.koin:koin-core:${Versions.Jvm.koin}"
         const val koinExt = "org.koin:koin-core-ext:${Versions.Jvm.koin}"
