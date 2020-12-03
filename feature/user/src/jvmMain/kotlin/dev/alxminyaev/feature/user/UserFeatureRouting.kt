@@ -4,6 +4,7 @@ import dev.alxminyaev.feature.user.api.apis.ProfessorApi
 import dev.alxminyaev.feature.user.api.apis.StudentApi
 import dev.alxminyaev.feature.user.api.apis.TutorApi
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.locations.*
 import io.ktor.routing.*
 
@@ -11,9 +12,11 @@ import io.ktor.routing.*
 fun Application.userFeatureRouting() {
     routing {
         route("/user") {
-            StudentApi()
-            ProfessorApi()
-            TutorApi()
+            authenticate {
+                TutorApi()
+                StudentApi()
+                ProfessorApi()
+            }
         }
     }
 

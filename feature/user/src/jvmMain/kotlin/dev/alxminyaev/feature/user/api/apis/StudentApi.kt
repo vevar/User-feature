@@ -10,7 +10,11 @@ import dev.alxminyaev.feature.user.usecase.professor.CreateProfessorUseCase
 import dev.alxminyaev.feature.user.usecase.professor.GetProfessorByIdUseCase
 import dev.alxminyaev.feature.user.usecase.student.CreateStudentUseCase
 import dev.alxminyaev.feature.user.usecase.student.GetStudentByIdUseCase
+import dev.alxminyaev.tool.webServer.utils.User
+import dev.alxminyaev.tool.webServer.utils.UserType
+import dev.alxminyaev.tool.webServer.utils.user
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.http.*
 import io.ktor.locations.*
 import io.ktor.request.*
@@ -31,9 +35,18 @@ fun Route.StudentApi() {
 
 
     get { pathParams: Paths.getStudentById ->
-        val getStudentUseCase by di().instance<GetStudentByIdUseCase>()
-        val student = getStudentUseCase.invoke(pathParams.id)
-        call.respond(student)
+        val user = call.user
+        when {
+            user != null && (user.userType == UserType.PROFESSOR || user.userType == UserType.TUTOR
+                    || (user.userType == UserType.STUDENT && user.id == pathParams.id)) -> {
+
+                val getStudentUseCase by di().instance<GetStudentByIdUseCase>()
+                val student = getStudentUseCase.invoke(pathParams.id)
+                call.respond(student)
+            }
+            else -> call.respond(HttpStatusCode.Forbidden)
+        }
+
     }
 
 
