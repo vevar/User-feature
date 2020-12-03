@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class Tutor(
     val id: Int,
     override val profile: Profile,
-    override val account: Account
+    override val account: Account?
 ) : User()
