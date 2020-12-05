@@ -12,11 +12,9 @@ import io.ktor.routing.*
 fun Application.userFeatureRouting() {
     routing {
         route("/user") {
-            authenticate {
-                TutorApi()
-                StudentApi()
-                ProfessorApi()
-            }
+            TutorApi()
+            StudentApi()
+            ProfessorApi()
         }
     }
 
