@@ -9,38 +9,43 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-# host: "0.0.0.0"
-# basePath: "/auth"
 
 servers:
   - url: "http://localhost/user"
 tags:
+  - name: "User"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
   - name: "Professor"
+    description: "Роль"
     externalDocs:
       description: "Find out more"
       url: "http://swagger.io"
   - name: "Student"
+    description: "Роль"
     externalDocs:
       description: "Find out more"
       url: "http://swagger.io"
   - name: "Tutor"
+    description: "Роль"
     externalDocs:
       description: "Find out more"
       url: "http://swagger.io"
 
 paths:
-  /api/v1/professor:
+  /api/v1/user:
     post:
       tags:
-        - "Professor"
-      summary: "Create professor"
+        - "User"
+      summary: "Create user"
       description: ""
-      operationId: "postProfessor"
+      operationId: "postUser"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProfessorPostRequest'
+              $ref: '#/components/schemas/UserRequest'
       responses:
         '200':
           description: OK
@@ -48,8 +53,59 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserCreatedResponse"
+        "403":
+          description: "Forbidden"
         "401":
           description: "Unauthorized"
+  /api/v1/user/{id}:
+    put:
+      tags:
+        - "User"
+      summary: "Update user"
+      description: ""
+      operationId: "putUser"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: OK
+        "403":
+          description: "Forbidden"
+        "401":
+          description: "Unauthorized"
+    delete:
+      tags:
+        - "User"
+      summary: "Update user"
+      description: ""
+      operationId: "deleteUser"
+      parameters:
+        - name: id
+          in: path
+          description: ID of object to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        "403":
+          description: "Forbidden"
+        "401":
+          description: "Unauthorized"
+
   /api/v1/professor/{id}:
     get:
       tags:
@@ -74,27 +130,6 @@ paths:
                 $ref: "#/components/schemas/ProfessorGetResponse"
         "404":
           description: "Not found"
-    delete:
-      tags:
-        - "Professor"
-      summary: "Get professor by id "
-      description: ""
-      operationId: "deleteProfessorById"
-      parameters:
-        - name: id
-          in: path
-          description: ID of object to delete
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-        "404":
-          description: "Not found"
-        "401":
-          description: "Unauthorized"
     put:
       tags:
         - "Professor"
@@ -119,31 +154,12 @@ paths:
           description: OK
         "404":
           description: "Not found"
+        "403":
+          description: "Forbidden"
         "401":
           description: "Unauthorized"
 
 
-  /api/v1/student:
-    post:
-      tags:
-        - "Student"
-      summary: "Create student"
-      description: ""
-      operationId: "postStudent"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StudentPostRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserCreatedResponse"
-        "401":
-          description: "Unauthorized"
   /api/v1/student/{id}:
     get:
       tags:
@@ -168,27 +184,6 @@ paths:
                 $ref: "#/components/schemas/StudentGetResponse"
         "404":
           description: "Not found"
-    delete:
-      tags:
-        - "Student"
-      summary: "Get student by id "
-      description: ""
-      operationId: "deleteStudentById"
-      parameters:
-        - name: id
-          in: path
-          description: ID of object to delete
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: OK
-        "404":
-          description: "Not found"
-        "401":
-          description: "Unauthorized"
     put:
       tags:
         - "Student"
@@ -213,30 +208,11 @@ paths:
           description: OK
         "404":
           description: "Not found"
+        "403":
+          description: "Forbidden"
         "401":
           description: "Unauthorized"
 
-  /api/v1/tutor:
-    post:
-      tags:
-        - "Tutor"
-      summary: "Create tutor"
-      description: ""
-      operationId: "postTutor"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TutorPostRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserCreatedResponse"
-        "401":
-          description: "Unauthorized"
   /api/v1/tutor/{id}:
     get:
       tags:
@@ -261,27 +237,6 @@ paths:
                 $ref: "#/components/schemas/TutorGetResponse"
         "404":
           description: "Not found"
-    delete:
-      tags:
-        - "Tutor"
-      summary: "Get tutor by id "
-      description: ""
-      operationId: "deleteTutorById"
-      parameters:
-        - name: id
-          in: path
-          description: ID of object to delete
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-        "404":
-          description: "Not found"
-        "401":
-          description: "Unauthorized"
     put:
       tags:
         - "Tutor"
@@ -306,6 +261,8 @@ paths:
           description: OK
         "404":
           description: "Not found"
+        "403":
+          description: "Forbidden"
         "401":
           description: "Unauthorized"
 
@@ -339,16 +296,6 @@ components:
         repeatPassword:
           type: "string"
 
-    ProfessorPostRequest:
-      type: object
-      required:
-        - account
-        - profile
-      properties:
-        account:
-          $ref: '#/components/schemas/AccountNew'
-        profile:
-          $ref: '#/components/schemas/Profile'
     ProfessorPutRequest:
       type: object
       required:
@@ -364,20 +311,7 @@ components:
       properties:
         user:
           $ref: "#/components/schemas/UserResponse"
-        groupId:
-          type: "integer"
-          format: "int32"
 
-    TutorPostRequest:
-      type: object
-      required:
-        - account
-        - profile
-      properties:
-        account:
-          $ref: '#/components/schemas/AccountNew'
-        profile:
-          $ref: '#/components/schemas/Profile'
     TutorPutRequest:
       type: object
       required:
@@ -395,7 +329,7 @@ components:
           $ref: "#/components/schemas/UserResponse"
 
 
-    StudentPostRequest:
+    UserRequest:
       type: object
       required:
         - account
@@ -405,9 +339,10 @@ components:
           $ref: '#/components/schemas/AccountNew'
         profile:
           $ref: '#/components/schemas/Profile'
-        groupId:
-          type: "integer"
-          format: "int32"
+        roles:
+          type: array
+          items:
+            type: integer
 
     StudentPutRequest:
       type: object
