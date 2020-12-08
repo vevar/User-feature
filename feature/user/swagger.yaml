@@ -71,7 +71,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ProfessorGetRequest"
+                $ref: "#/components/schemas/ProfessorGetResponse"
         "404":
           description: "Not found"
     delete:
@@ -357,17 +357,16 @@ components:
         profile:
           $ref: '#/components/schemas/Profile'
 
-    ProfessorGetRequest:
+    ProfessorGetResponse:
       type: object
       required:
-        - id
-        - profile
+        - user
       properties:
-        id:
+        user:
+          $ref: "#/components/schemas/UserResponse"
+        groupId:
           type: "integer"
           format: "int32"
-        profile:
-          $ref: '#/components/schemas/Profile'
 
     TutorPostRequest:
       type: object
@@ -390,14 +389,10 @@ components:
     TutorGetResponse:
       type: object
       required:
-        - id
-        - profile
+        - user
       properties:
-        id:
-          type: "integer"
-          format: "int32"
-        profile:
-          $ref: '#/components/schemas/Profile'
+        user:
+          $ref: "#/components/schemas/UserResponse"
 
 
     StudentPostRequest:
@@ -410,6 +405,9 @@ components:
           $ref: '#/components/schemas/AccountNew'
         profile:
           $ref: '#/components/schemas/Profile'
+        groupId:
+          type: "integer"
+          format: "int32"
 
     StudentPutRequest:
       type: object
@@ -418,19 +416,37 @@ components:
       properties:
         profile:
           $ref: '#/components/schemas/Profile'
+        groupId:
+          type: "integer"
+          format: "int32"
 
     StudentGetResponse:
       type: object
       required:
+        - user
+      properties:
+        user:
+          $ref: "#/components/schemas/UserResponse"
+        groupId:
+          type: "integer"
+          format: "int32"
+
+    UserResponse:
+      type: object
+      required:
         - id
-        - profile
+        - type
       properties:
         id:
           type: "integer"
           format: "int64"
-        profile:
-          $ref: '#/components/schemas/Profile'
+        roles:
+          type: array
+          items:
+            type: integer
 
+        profile:
+          $ref: "#/components/schemas/Profile"
 
 
     UserCreatedResponse:
