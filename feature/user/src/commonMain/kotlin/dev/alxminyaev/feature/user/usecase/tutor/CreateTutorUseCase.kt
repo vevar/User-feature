@@ -19,10 +19,11 @@ class CreateTutorUseCase(
 
         // TODO MEDIUM Need validation of data
 
-        val account = Account(login, password)
-        val profile = Profile(firstName = firstName, middleName = middleName, lastName = lastName)
-        val tutor = Tutor(0, profile, account)
-
-        return tutorRepository.save(tutor)
+//        val account = Account(login, password)
+//        val profile = Profile(firstName = firstName, middleName = middleName, lastName = lastName)
+//        val tutor = Tutor(0, profile, account)
+//
+//        return tutorRepository.save(tutor)
+        TODO()
     }
 }

@@ -15,11 +15,11 @@ import dev.alxminyaev.feature.user.api.models.Profile
 
 /**
  * 
- * @param id 
  * @param profile 
+ * @param groupId 
  */
-data class TutorGetResponse (
-    val id: kotlin.Int,
-    val profile: Profile
+data class StudentPutRequest (
+    val profile: Profile,
+    val groupId: kotlin.Int? = null
 ) 
 

@@ -11,15 +11,13 @@
 */
 package dev.alxminyaev.feature.user.api.models
 
-import dev.alxminyaev.feature.user.api.models.Profile
+import dev.alxminyaev.feature.user.api.models.UserResponse
 
 /**
  * 
- * @param id 
- * @param profile 
+ * @param data 
  */
-data class ProfessorGetRequest (
-    val id: kotlin.Int,
-    val profile: Profile
+data class UserListResponse (
+    val data: kotlin.Array<UserResponse>
 ) 
 

@@ -11,13 +11,18 @@
 */
 package dev.alxminyaev.feature.user.api.models
 
+import dev.alxminyaev.feature.user.api.models.AccountNew
 import dev.alxminyaev.feature.user.api.models.Profile
 
 /**
  * 
+ * @param account 
  * @param profile 
+ * @param roles 
  */
-data class StudentPutRequest (
-    val profile: Profile
+data class UserRequest (
+    val account: AccountNew,
+    val profile: Profile,
+    val roles: kotlin.Array<kotlin.Int>
 ) 
 

@@ -21,23 +21,20 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 @KtorExperimentalLocationsAPI
-fun Route.StudentApi() {
+fun Route.RoleApi() {
     val gson = Gson()
     val empty = mutableMapOf<String, Any?>()
 
-    get<Paths.getStudentById> {  _: Paths.getStudentById ->
+    get<Paths.getRole> {  _: Paths.getRole ->
         val exampleContentType = "application/json"
 val exampleContentString = """{
-          "groupId" : 0,
-          "user" : {
-            "roles" : [ 6, 6 ],
-            "profile" : {
-              "firstName" : "firstName",
-              "lastName" : "lastName",
-              "middleName" : "middleName"
-            },
+          "data" : [ {
+            "name" : "name",
             "id" : 0
-          }
+          }, {
+            "name" : "name",
+            "id" : 0
+          } ]
         }"""
 
 when(exampleContentType) {
@@ -46,14 +43,6 @@ when(exampleContentType) {
     else -> call.respondText(exampleContentString)
 }
 
-    }
-
-
-    route("/api/v1/student/{id}") {
-        put {
-            call.respond(HttpStatusCode.NotImplemented)
-
-        }
     }
 
 }

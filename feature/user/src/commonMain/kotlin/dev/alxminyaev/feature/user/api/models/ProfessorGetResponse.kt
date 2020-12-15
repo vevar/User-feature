@@ -11,16 +11,13 @@
 */
 package dev.alxminyaev.feature.user.api.models
 
-import dev.alxminyaev.feature.user.api.models.AccountNew
-import dev.alxminyaev.feature.user.api.models.Profile
+import dev.alxminyaev.feature.user.api.models.UserResponse
 
 /**
  * 
- * @param account 
- * @param profile 
+ * @param user 
  */
-data class ProfessorPostRequest (
-    val account: AccountNew,
-    val profile: Profile
+data class ProfessorGetResponse (
+    val user: UserResponse
 ) 
 

@@ -18,26 +18,17 @@ object Paths {
     /**
      * Get professor by id 
      * 
-     * @param id ID of object to delete 
-     */
-    @KtorExperimentalLocationsAPI
-    @Location("/api/v1/professor/{id}") class deleteProfessorById(val id: kotlin.Int)
-
-    /**
-     * Get professor by id 
-     * 
      * @param id ID of object to return 
      */
     @KtorExperimentalLocationsAPI
     @Location("/api/v1/professor/{id}") class getProfessorById(val id: kotlin.Int)
 
     /**
-     * Get student by id 
+     * Get roles
      * 
-     * @param id ID of object to delete 
      */
     @KtorExperimentalLocationsAPI
-    @Location("/api/v1/student/{id}") class deleteStudentById(val id: kotlin.Long)
+    @Location("/api/v1/role") class getRole()
 
     /**
      * Get student by id 
@@ -50,17 +41,27 @@ object Paths {
     /**
      * Get tutor by id 
      * 
-     * @param id ID of object to delete 
-     */
-    @KtorExperimentalLocationsAPI
-    @Location("/api/v1/tutor/{id}") class deleteTutorById(val id: kotlin.Int)
-
-    /**
-     * Get tutor by id 
-     * 
      * @param id ID of object to return 
      */
     @KtorExperimentalLocationsAPI
     @Location("/api/v1/tutor/{id}") class getTutorById(val id: kotlin.Int)
+
+    /**
+     * Update user
+     * 
+     * @param id ID of object to return 
+     */
+    @KtorExperimentalLocationsAPI
+    @Location("/api/v1/user/{id}") class deleteUser(val id: kotlin.Long)
+
+    /**
+     * Get users
+     * 
+     * @param offset The number of items to skip before starting to collect the result set 
+     * @param limit The numbers of items to return 
+     * @param roles  (optional)
+     */
+    @KtorExperimentalLocationsAPI
+    @Location("/api/v1/user") class getUsers(val offset: kotlin.Long, val limit: kotlin.Int, val roles: kotlin.Array<kotlin.Int>? = null)
 
 }

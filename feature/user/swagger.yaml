@@ -13,6 +13,10 @@ info:
 servers:
   - url: "http://localhost/user"
 tags:
+  - name: "Role"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
   - name: "User"
     externalDocs:
       description: "Find out more"
@@ -34,6 +38,21 @@ tags:
       url: "http://swagger.io"
 
 paths:
+  /api/v1/role:
+    get:
+      tags:
+        - "Role"
+      summary: "Get roles"
+      description: ""
+      operationId: "getRole"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleListResponse"
+
   /api/v1/user:
     post:
       tags:
@@ -53,6 +72,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserCreatedResponse"
+        "403":
+          description: "Forbidden"
+        "401":
+          description: "Unauthorized"
+    get:
+      tags:
+        - "User"
+      summary: "Get users"
+      description: ""
+      operationId: "getUsers"
+      parameters:
+        - in: query
+          required: true
+          name: offset
+          schema:
+            type: integer
+            format: int64
+          description: The number of items to skip before starting to collect the result set
+        - in: query
+          required: true
+          name: limit
+          schema:
+            type: integer
+            format: int32
+          description: The numbers of items to return
+        - in: query
+          name: roles
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserListResponse"
         "403":
           description: "Forbidden"
         "401":
@@ -334,6 +392,7 @@ components:
       required:
         - account
         - profile
+        - roles
       properties:
         account:
           $ref: '#/components/schemas/AccountNew'
@@ -366,11 +425,20 @@ components:
           type: "integer"
           format: "int32"
 
+    UserListResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponse'
+
     UserResponse:
       type: object
       required:
         - id
-        - type
       properties:
         id:
           type: "integer"
@@ -383,7 +451,27 @@ components:
         profile:
           $ref: "#/components/schemas/Profile"
 
+    RoleListResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleResponse'
 
+    RoleResponse:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
     UserCreatedResponse:
       type: object
       required:

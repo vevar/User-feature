@@ -17,10 +17,11 @@ class CreateProfessorUseCase(
         // TODO MEDIUM Need validation of data
 
 
-        val account = Account(login, password)
-        val profile = Profile(firstName = firstName, middleName = middleName, lastName = lastName)
-        val student = Professor(0, account = account, profile = profile)
-
-        return professorRepository.save(student)
+//        val account = Account(login, password)
+//        val profile = Profile(firstName = firstName, middleName = middleName, lastName = lastName)
+//        val student = Professor(0, account = account, profile = profile)
+//
+//        return professorRepository.save(student)
+        TODO()
     }
 }

@@ -10,17 +10,17 @@ class TutorRepository(
     private val cacheDataSource: TutorDataSource? = null
 ) : TutorRDS {
 
-    override suspend fun findById(id: Int): Tutor? {
+    override suspend fun findById(id: Long): Tutor? {
         return cacheDataSource?.findById(id) ?: mainDataSource.findById(id)
     }
 
-    override suspend fun save(entity: Tutor): Int {
+    override suspend fun save(entity: Tutor): Long {
         return mainDataSource.save(entity).also {
             cacheDataSource?.save(entity.copy(id = it))
         }
     }
 
-    override suspend fun save(entities: List<Tutor>): List<Int> {
+    override suspend fun save(entities: List<Tutor>): List<Long> {
         return mainDataSource.save(entities).also {
 
             cacheDataSource?.run {
@@ -38,7 +38,7 @@ class TutorRepository(
         }
     }
 
-    override suspend fun delete(id: Int) {
+    override suspend fun delete(id: Long) {
         return mainDataSource.delete(id).also {
             cacheDataSource?.delete(id)
         }

@@ -20,9 +20,7 @@ class CreateStudentUseCase(
 
         // TODO MEDIUM Need validation of data
 
-        val account = Account(login, password)
-        val profile = Profile(firstName = firstName, middleName = middleName, lastName = lastName)
-        val student = Student(0, account = account, profile = profile)
+        val student = Student(0)
 
         return studentRepository.save(student)
     }

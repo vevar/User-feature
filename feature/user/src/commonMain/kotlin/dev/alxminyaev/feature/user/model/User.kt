@@ -1,7 +1,8 @@
 package dev.alxminyaev.feature.user.model
 
-abstract class User {
-    abstract val account: Account?
-    abstract val profile: Profile
-
-}
+data class User(
+    val id: Long,
+    val account: Account?,
+    val profile: Profile,
+    val roles: List<Role>
+)
