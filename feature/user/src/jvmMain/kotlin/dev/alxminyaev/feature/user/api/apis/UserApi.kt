@@ -42,15 +42,21 @@ fun Route.UserApi() {
     }
 
 
-    get<Paths.getUsers> { param: Paths.getUsers ->
-        val getUserUC by di().instance<GetUsersListUseCase>()
-        val users =
-            getUserUC.invoke(DataLimit(param.offset, param.limit), roles = param.roles?.map { Role.valueById(it) })
-        call.respond(UserListResponse(data = users.map { it.toUserResponse() }.toTypedArray()))
-    }
-
-
     route("/api/v1/user") {
+
+        get {
+            val queryParameters = call.request.queryParameters
+            val offset = queryParameters["offset"]?.toLong() ?: 0
+            val limit = queryParameters["limit"]?.toInt() ?: 50
+            val roles = queryParameters.getAll("roles")?.map { it.toInt() }
+
+            val getUserUC by di().instance<GetUsersListUseCase>()
+            val users =
+                getUserUC.invoke(DataLimit(offset, limit), roles = roles?.map { Role.valueById(it) })
+            call.respond(UserListResponse(data = users.map { it.toUserResponse() }.toTypedArray()))
+
+        }
+
         post {
             val createUserUC by di().instance<CreateUserUseCase>()
             val userRequest = call.receive<UserRequest>()

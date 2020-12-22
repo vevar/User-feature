@@ -12,6 +12,8 @@ info:
 
 servers:
   - url: "http://localhost/user"
+  - url: "http://5.130.14.37:8080/user"
+
 tags:
   - name: "Role"
     externalDocs:
