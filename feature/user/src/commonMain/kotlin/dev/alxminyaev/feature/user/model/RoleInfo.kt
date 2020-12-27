@@ -27,7 +27,9 @@ enum class Role(val id: Int) {
     PROFESSOR(1),
     STUDENT(2),
     TUTOR(3),
-    ADMIN(4);
+    ADMIN(4),
+    OUT_STUDY_ORGANIZER(5),
+    OUT_STUDY_MEMBER(6);
 
 
     companion object {
@@ -37,6 +39,8 @@ enum class Role(val id: Int) {
                 STUDENT.id -> STUDENT
                 TUTOR.id -> TUTOR
                 ADMIN.id -> ADMIN
+                OUT_STUDY_ORGANIZER.id -> OUT_STUDY_ORGANIZER
+                OUT_STUDY_MEMBER.id -> OUT_STUDY_MEMBER
                 else -> UNKNOWN
             }
         }
