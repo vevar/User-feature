@@ -18,11 +18,27 @@ class CreateUserUseCase(
             throw ExistException("Пользователь с таким логином уже существует")
         }
 
+        val formattedRoles = when {
+            roles.contains(Role.ADMIN) -> {
+                roles.toMutableSet()
+            }
+            roles.contains(Role.STUDENT) -> {
+                roles.toMutableSet().apply {
+                    add(Role.OUT_STUDY_MEMBER)
+                }
+            }
+            roles.contains(Role.PROFESSOR) -> {
+                roles.toMutableSet().apply {
+                    add(Role.OUT_STUDY_ORGANIZER)
+                }
+            }
+            else -> roles.toMutableSet()
+        }
         val user = User(
             id = 0,
             account = account,
             profile = profile,
-            roles = roles
+            roles = formattedRoles
         )
 
         return userRepository.save(user)

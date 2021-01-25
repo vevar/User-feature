@@ -4,5 +4,5 @@ data class User(
     val id: Long,
     val account: Account?,
     val profile: Profile,
-    val roles: List<Role>
+    val roles: Set<Role>
 )
