@@ -83,6 +83,8 @@ dependencies {
         mppLibrary(Deps.Multiplatform.kotlinSerializationRuntime)
 
         mppModule(Modules.Tool.Mpp.errorHandling)
+        mppModule(Modules.Tool.Mpp.domain)
+
 
     }
 }
