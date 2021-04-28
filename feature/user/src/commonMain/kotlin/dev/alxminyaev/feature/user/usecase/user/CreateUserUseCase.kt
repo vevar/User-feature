@@ -12,6 +12,9 @@ class CreateUserUseCase(
     suspend fun invoke(profile: Profile, account: Account, roles: List<Role>): Long {
         profile.validate()
         account.validate()
+        if (roles.isEmpty()) {
+            throw ValidationDataException(field = "roles", message = "Хотя бы одна роль должна быть задана")
+        }
 
         val existUser = userRepository.findByLogin(account.login)
 
