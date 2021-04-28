@@ -1,5 +1,7 @@
 package dev.alxminyaev.feature.user.model
 
+import com.alxminyaev.tool.error.exceptions.ValidationDataException
+
 sealed class RoleInfo {
 
     abstract val id: Role
@@ -23,7 +25,6 @@ sealed class RoleInfo {
 }
 
 enum class Role(val id: Int) {
-    UNKNOWN(0),
     PROFESSOR(1),
     STUDENT(2),
     TUTOR(3),
@@ -41,7 +42,7 @@ enum class Role(val id: Int) {
                 ADMIN.id -> ADMIN
                 OUT_STUDY_ORGANIZER.id -> OUT_STUDY_ORGANIZER
                 OUT_STUDY_MEMBER.id -> OUT_STUDY_MEMBER
-                else -> UNKNOWN
+                else -> throw ValidationDataException("Неизвестный id роли (id=${id})")
             }
         }
 

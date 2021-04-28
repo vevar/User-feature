@@ -1,6 +1,7 @@
 package dev.alxminyaev.feature.user.usecase.user
 
 import com.alxminyaev.tool.error.exceptions.ExistException
+import com.alxminyaev.tool.error.exceptions.ValidationDataException
 import dev.alxminyaev.feature.user.model.*
 import dev.alxminyaev.feature.user.repository.UserRepository
 
