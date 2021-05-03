@@ -12,6 +12,7 @@
 package dev.alxminyaev.feature.user.api.apis
 
 
+import com.alxminyaev.tool.error.exceptions.ValidationDataException
 import com.google.gson.Gson
 import dev.alxminyaev.feature.user.DataLimit
 import dev.alxminyaev.feature.user.api.Paths
@@ -22,8 +23,10 @@ import dev.alxminyaev.feature.user.api.toUserResponse
 import dev.alxminyaev.feature.user.model.Role
 import dev.alxminyaev.feature.user.model.toDomain
 import dev.alxminyaev.feature.user.usecase.user.CreateUserUseCase
+import dev.alxminyaev.feature.user.usecase.user.GetUserByIdUseCase
 import dev.alxminyaev.feature.user.usecase.user.GetUsersListUseCase
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.http.*
 import io.ktor.locations.*
 import io.ktor.request.*
@@ -37,9 +40,9 @@ fun Route.UserApi() {
     val gson = Gson()
     val empty = mutableMapOf<String, Any?>()
 
-    delete<Paths.deleteUser> { _: Paths.deleteUser ->
-
-    }
+//    delete<Paths.deleteUser> { _: Paths.deleteUser ->
+//
+//    }
 
 
     route("/api/v1/user") {
@@ -68,12 +71,20 @@ fun Route.UserApi() {
         }
     }
 
-
     route("/api/v1/user/{id}") {
-        put {
-            call.respond(HttpStatusCode.NotImplemented)
+        authenticate {
 
+            put {
+                call.respond(HttpStatusCode.NotImplemented)
+            }
+
+            get {
+                val useCase by di().instance<GetUserByIdUseCase>()
+                val userId = call.parameters["id"]?.toLong() ?: throw ValidationDataException("param id not fount")
+                call.respond(useCase.invoke(userId).toUserResponse())
+            }
         }
     }
+
 
 }

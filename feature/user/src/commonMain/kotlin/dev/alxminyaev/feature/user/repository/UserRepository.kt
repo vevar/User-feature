@@ -14,5 +14,7 @@ interface UserRepository {
 
     suspend fun save(user: User): Long
 
+    suspend fun findById(id: Long): User?
+
 
 }
