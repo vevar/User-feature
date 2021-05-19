@@ -28,6 +28,10 @@ fun Application.userFeatureRouting() {
                     val user = useCase.invoke(call.user.id)
                     val redirectPath = when {
                         user.roles.contains(Role.ADMIN) -> "/admin/"
+                        user.roles.contains(Role.TUTOR) -> "/tutor/"
+                        user.roles.contains(Role.PROFESSOR) -> "/professor/"
+                        user.roles.contains(Role.STUDENT) -> "/student/"
+
                         else -> throw PermissionException()
                     }
                     call.respond(TemporaryRedirectResponse(location = redirectPath))
